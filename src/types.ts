@@ -10,3 +10,8 @@ export enum StatusCode{
     BAD_REQUEST=405,
     INTERNAL_SERVER_ERROR=500
 }
+export interface apiRoute{
+    path:string,
+    method:"get" | "post" | "put" | "delete" | "options",
+    controller:()=>{}
+}
