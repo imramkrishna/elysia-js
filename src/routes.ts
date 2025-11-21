@@ -1,4 +1,4 @@
-import { addUserController, deleteUserController, getUserByIdController, getUserController, updateUserController } from "./controllers/dbcontroller"
+import { addUserController, addUserDetailController, deleteUserController, getUserByIdController, getUserController, updateUserController } from "./controllers/dbcontroller"
 import { apiRoute } from "./types";
 const routes:apiRoute[]=[
     {
@@ -25,6 +25,11 @@ const routes:apiRoute[]=[
         path:"deleteUser/:id",
         method:"delete",
         controller:deleteUserController
+    },
+    {
+        path:"addUserDetail",
+        method:"post",
+        controller:addUserDetailController
     }
 ]
 export default routes;

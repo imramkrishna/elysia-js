@@ -1,6 +1,6 @@
 import { db } from "../db/client"
 import { Context } from "elysia"
-import { users } from "../db/schema"
+import { userDetails, users } from "../db/schema"
 import { eq, ilike } from "drizzle-orm"
 export const addUserController = async ({ body, set }: Context | any) => {
     try {
@@ -89,5 +89,24 @@ export const deleteUserController=async({params}:Context)=>{
         }
     } catch (error) {
         return "error deleting user"
+    }
+}
+export const addUserDetailController=async()=>{
+    try {
+        const result=await db.transaction(async(tx)=>{
+            const [user1]=await tx.insert(users).values({email:"newemail@email.com"}).returning();
+            const [userDetails1]=await tx.insert(userDetails).values({name:"New Email",userId:user1.id}).returning();
+            return{
+                message:"user added",
+                user:{
+                    id:user1.id,
+                    email:user1.email,
+                    name:userDetails1.name
+                },
+                
+            }
+        })
+    } catch (error) {
+        return "error while adding user details"
     }
 }
