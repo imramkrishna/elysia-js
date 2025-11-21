@@ -1,3 +1,5 @@
+import { Context } from "elysia"
+
 export type User={
     id:number
     email:string,
@@ -13,5 +15,5 @@ export enum StatusCode{
 export interface apiRoute{
     path:string,
     method:"get" | "post" | "put" | "delete" | "options",
-    controller:()=>{}
+    controller:(arg:Context | any)=>{}
 }
